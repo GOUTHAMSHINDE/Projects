@@ -1,0 +1,84 @@
+Why Recommendations are Important?
+	Almost every one of us nowadays is using YouTube, and it turned out to be fascinating to know how YouTube recommends videos in the same genre/type that we watched a day ago, an hour ago, or a minute ago. In the backend, that is what the recommendation system does in its tasks to recommend the video based on user preferences. 
+	Many companies like Netflix, Prime are making huge amount of money using recommendation systems.
+
+Types of Recommendations:
+	1.Content Based Filtering:
+		This type of filtering involves tangible items as it filters the content based on the user preferences, the features of the products, and other relatable items.Let me take an example to simplify: suppose you went to Amazon to buy a mobile phone, and you will see the other options showing the same product features (high or low) at almost the same prices but different mobile phones.
+	2.Collaborative based Filtering:
+		This is different from content-based as collaborative filtering involves user-to-user recommendations based on previous feedback and choices. That’s why collaborative filtering is widely implemented in the real world, based on previous users.Example: In the Amazon store only, we see the “the items bought together” section it has certainty because of collaborative filtering only
+		i)User-based collaborative filtering: 
+			It aims to recommend items to a user (A) based on the preferences of similar users in the database. It involves creating a matrix of items rated/liked/clicked by each user, computing similarity scores between users, and then suggesting items that user A hasn’t encountered yet but similar users have liked.
+		ii)Item based collaborative filtering:
+			Item-based Collaborative Filtering focuses on finding similar movies instead of similar users to recommend to user ‘A’ based on their past preferences. It identifies pairs of movies rated/liked by the same users, measures their similarity across all users who rated both, and then suggests similar movies based on the similarity scores.
+
+I have used TMDB-5000 data set to build a recommendation system.
+To reduce the text to its root words i used Porter Stemmer.
+
+To convert text data into numeric data I have used TF-IDF vectorizer and can also use count vectorizer.
+ How does TFIDF Vectorizer Work?
+Tokenization: Break down the text documents into individual words or tokens.
+Term Frequency (TF): For each term in a document, calculate the frequency of occurrence within that document. This is typically done by counting the number of times each term appears divided by the total number of terms in the document
+	TF(t,d)=			Total number of terms in document d
+					Number of times term t appears in document d
+​
+Document Frequency (DF): Calculate the number of documents that contain each term. This is done by counting the number of documents in the corpus where the term appears at least once.
+Inverse Document Frequency (IDF): Calculate the inverse document frequency for each term. IDF penalizes terms that appear in many documents and rewards terms that appear in fewer documents. It is calculated as the logarithm of the total number of documents divided by the document frequency for each term.
+			
+IDF(t,d)=		log(	Number of documents containing term t 	)
+					  Total number of documents in the corpus N
+​
+TF-IDF Calculation: Multiply the term frequency (TF) by the inverse document frequency (IDF) for each term-document pair.
+
+TF-IDF(t,d,D)=TF(t,d)×IDF(t,D)
+
+Normalization: Optionally, you can normalize the TF-IDF scores to ensure that the values are within a certain range or have a specific distribution.
+Vectorization: Represent each document as a vector of TF-IDF scores, with each dimension corresponding to a unique term in the corpus.
+ 
+
+How does Count VEctorizer work?
+Count vectorization:
+it is used for converting text data to numeric which can be fed to ML algos.
+
+How it Works:
+
+"The quick brown fox jumps over the lazy dog."
+"The dog barks loudly."
+"The fox and the dog are good friends."
+Now, we want to use CountVectorizer to convert these documents into a matrix of token counts. Here's how it works step by step:
+
+Tokenization:
+We split each document into individual words, ignoring punctuation and converting all words to lowercase:
+Document 1: ["the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
+Document 2: ["the", "dog", "barks", "loudly"]
+Document 3: ["the", "fox", "and", "the", "dog", "are", "good", "friends"]
+Counting:
+We count the frequency of each term in the entire set of documents:
+"the": 4
+"quick": 1
+"brown": 1
+"fox": 2
+"jumps": 1
+"over": 1
+"lazy": 1
+"dog": 3
+"barks": 1
+"loudly": 1
+"and": 1
+"are": 1
+"good": 1
+"friends": 1
+Vectorization:
+We transform each document into a vector representing the term frequencies:
+Document 1: [2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]
+Document 2: [1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0]
+Document 3: [2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1]
+In this resulting matrix:
+
+Each row represents a document.
+Each column represents a unique term from the entire set of documents.
+The value in each cell represents the count of how many times each term appears in the corresponding document.
+
+I used cosine similarity to find the similairty between films to claculate similarity matrix.
+
+I built web app using streamlit to show the recommendations.
