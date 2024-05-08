@@ -12,10 +12,10 @@ Types of Recommendations:
 		ii)Item based collaborative filtering:
 			Item-based Collaborative Filtering focuses on finding similar movies instead of similar users to recommend to user ‘A’ based on their past preferences. It identifies pairs of movies rated/liked by the same users, measures their similarity across all users who rated both, and then suggests similar movies based on the similarity scores.
 
-I have used TMDB-5000 data set to build a recommendation system.
-To reduce the text to its root words i used Porter Stemmer.
+I have used TMDB-5000 data set to build a recommendation system based on demographic, content based and collaborative filtering.
+To reduce the text to its root words i have used Porter Stemmer.
 
-To convert text data into numeric data I have used TF-IDF vectorizer and can also use count vectorizer.
+To convert text data into numeric data I have used TF-IDF, Count vectorizer.
  How does TFIDF Vectorizer Work?
 Tokenization: Break down the text documents into individual words or tokens.
 Term Frequency (TF): For each term in a document, calculate the frequency of occurrence within that document. This is typically done by counting the number of times each term appears divided by the total number of terms in the document
